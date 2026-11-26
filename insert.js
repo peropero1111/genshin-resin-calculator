@@ -2,13 +2,19 @@
     const perHour = 7.5; // 시간당 차는 레진
     const maxResin = 200; // 최대 레진
 
+    function parseStrictInt(input) {
+    if (input === null) return NaN;
+    const trimmed = input.trim();
+    if (!/^\d+$/.test(trimmed)) return NaN;
+    return Number(trimmed);
+    }
+
    const choice = prompt("선택 :\n1. 레진 최대(200)까지 걸리는 시간\n2. 특정 값까지 걸리는 시간");
 
 if (choice === "1" || choice === "2") {
     const nowInput = prompt("현재 레진을 정수로 입력하세요 (0 ~ 200):");
-    const now_les = parseInt(nowInput, 10);
+    const now_les = parseStrictInt(nowInput);
 
-  
     if (isNaN(now_les) || now_les < 0 || now_les > maxResin) {
         alert("0에서 200 사이의 올바른 숫자를 입력해주세요.");
     } else {
@@ -17,7 +23,7 @@ if (choice === "1" || choice === "2") {
 
         if (choice === "2") {
             const targetInput = prompt(`목표 레진을 입력하세요 (현재 ${now_les} ~ 최대 ${maxResin}):`);
-            targetResin = parseInt(targetInput, 10);
+            targetResin = parseStrictInt(targetInput);
 
        
             if (isNaN(targetResin) || targetResin <= now_les || targetResin > maxResin) {
